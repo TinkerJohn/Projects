@@ -6,12 +6,10 @@
 
 Servo pan;  // create servo object to control a servo
 Servo tilt;
-int dir='\0';
-char pos = 0;
-int pr_tilt=0;
-int pr_pan=0;
 int ls_tilt=0;
 int ls_pan=0;
+int i,j;
+
 void setup() 
 {
  
@@ -60,169 +58,383 @@ void loop()
  {
   String cmd= Serial.readString(); //Reading the Input string from Serial port. 
 
-  if(cmd=="T\n")
+  if(cmd=="t\n") //Pan=80 and Tilt=125
   {
     Serial.println("Top");
-    pan.write(80);
-    for(int i=ls_tilt;i<=125;i++)
+    if(ls_pan<80)
     {
-     tilt.write(i);
-     delay(10); 
+    for(i=ls_pan; i<=80; i++)
+    {
+      pan.write(i);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(i=ls_pan; i>=80; i--)
+    {
+      pan.write(i);
+      delay(10);
+    }
     }
     ls_pan=80;
+    if(ls_tilt<125)
+    {
+    for(j=ls_tilt; j<=125; j++)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(j=ls_pan; j>=125; j--)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
     ls_tilt=125;
   }
 
 
   
-  else if(cmd=="B\n")
+  else if(cmd=="b\n") //Pan=80 and Tilt=35
   {
     Serial.println("Bottom");
-    pan.write(80); 
-    for(int i=ls_tilt;i>=35;i--)
+    if(ls_pan<80)
     {
-     tilt.write(i);
-     delay(10); 
+    for(i=ls_pan; i<=80; i++)
+    {
+      pan.write(i);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(i=ls_pan; i>=80; i--)
+    {
+      pan.write(i);
+      delay(10);
+    }
     }
     ls_pan=80;
+    if(ls_tilt<35)
+    {
+    for(j=ls_tilt; j<=35; j++)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(j=ls_tilt; j>=35; j--)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
     ls_tilt=35;
   }
 
 
   
-  else if(cmd=="L\n")
+  else if(cmd=="l\n") //Pan=0 and Tilt=125
   {
     Serial.println("Left");
-    for(int i=ls_pan;i>=0;i--)
+    for(i=ls_pan; i>=5; i--)
     {
-     pan.write(i);
-     delay(10); 
+      pan.write(i);
+      delay(10);
     }
-    for(int i=ls_tilt;i<=125;i++)
+    ls_pan=5;
+    if(ls_tilt<125)
     {
-     tilt.write(i);
-     delay(10); 
-    } 
-    ls_pan=0;
+    for(j=ls_tilt; j<=125; j++)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(j=ls_pan; j>=125; j--)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
     ls_tilt=125;
   }
 
 
   
-  else if(cmd=="R\n")
+  else if(cmd=="r\n") //Pan=180 and Tilt=125
   {
     Serial.println("Right");
-    for(int i=ls_pan;i<=180;i++)
+    if(ls_pan<180)
     {
-     pan.write(i);
-     delay(10); 
-    }
-       for(int i=ls_pan;i<=125;i++)
+    for(i=ls_pan; i<=180; i++)
     {
-    tilt.write(i);
-     delay(10); 
+      pan.write(i);
+      delay(10);
     }
-   // tilt.write(125);
+    }
+    else
+    {
+    for(i=ls_pan; i>=180; i--)
+    {
+      pan.write(i);
+      delay(10);
+    }
+    }
     ls_pan=180;
-    ls_tilt=125;      
+    if(ls_tilt<125)
+    {
+    for(j=ls_tilt; j<=125; j++)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(j=ls_tilt; j>=125; j--)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    ls_tilt=125;     
   }
 
 
   
-  else if(cmd=="TR\n")
+  else if(cmd=="tr\n") //Pan=125 and Tilt=125
   {
     Serial.println("Top Right");
-    for(int i=ls_pan;i<=125;i++)
+    if(ls_pan<125)
     {
-     pan.write(i);
-     delay(10); 
+    for(i=ls_pan; i<=125; i++)
+    {
+      pan.write(i);
+      delay(10);
     }
-    tilt.write(125);
+    }
+    else
+    {
+    for(i=ls_pan; i>=125; i--)
+    {
+      pan.write(i);
+      delay(10);
+    }
+    }
     ls_pan=125;
+    if(ls_tilt)
+    {
+    for(j=ls_tilt; j<=125; j++)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(j=ls_tilt; j>=125; j--)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
     ls_tilt=125;
   }
 
 
   
-  else if(cmd=="TL\n")
+  else if(cmd=="tl\n") //Pan=35 and Tilt=125
   {
     Serial.println("Top Left");
-    for(int i=ls_pan;i>=35;i--)
+    if(ls_pan<35)
     {
-     pan.write(i);
-     delay(10); 
+    for(i=ls_pan; i<=35; i++)
+    {
+      pan.write(i);
+      delay(10);
     }
-    tilt.write(125);
+    }
+    else
+    {
+    for(i=ls_pan; i>=35; i--)
+    {
+      pan.write(i);
+      delay(10);
+    }
+    }
     ls_pan=35;
+    if(ls_tilt)
+    {
+    for(j=ls_tilt; j<=125; j++)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(j=ls_tilt; j>=125; j--)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
     ls_tilt=125;
   }
 
 
   
-  else if(cmd=="BR\n")
+  else if(cmd=="br\n") //Pan=35 and Tilt=35
   {
     Serial.println("Bottom Right");
-    pan.write(35);
-    for(int i=ls_tilt;i>=35;i--)
+    if(ls_pan<35)
     {
-     tilt.write(i);
-     delay(10); 
+    for(i=ls_pan; i<=35; i++)
+    {
+      pan.write(i);
+      delay(10);
+    }
+    }
+    else
+    {
+      for(i=ls_pan; i>=35; i--)
+    {
+      pan.write(i);
+      delay(10);
+    }
     }
     ls_pan=35;
+    if(ls_tilt<35)
+    {
+    for(j=ls_tilt; j<=35; j++)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(j=ls_tilt; j>=35; j--)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
     ls_tilt=35; 
   }
 
 
   
-  else if(cmd=="BL\n")
+  else if(cmd=="bl\n") //Pan=125 and Tilt=35
   {
     Serial.println("Bottom Left");
-    for(int i=ls_pan;i<=125;i++)
+    if(ls_pan<125)
     {
-     pan.write(i);
-     delay(10); 
+    for(i=ls_pan; i<=125; i++)
+    {
+      pan.write(i);
+      delay(10);
     }
-    tilt.write(35);
+    }
+    else
+    {
+    for(i=ls_pan; i>=125; i--)
+    {
+      pan.write(i);
+      delay(10);
+    }
+    }
     ls_pan=125;
-    ls_tilt=35; 
+    if(ls_tilt<35)
+    {
+    for(j=ls_tilt; j<=35; j++)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(j=ls_tilt; j>=35; j--)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    ls_tilt=35;
   }
 
 
   
-  else if(cmd=="O\n")
+  else if(cmd=="o\n") //Pan=0 and Tilt=0
   {
     Serial.println("Origin");
-    for(int i=ls_pan;i>=0;i--)
+    for(i=ls_pan; i>=5; i--)
     {
-     pan.write(i);
-     delay(10); 
+      pan.write(i);
+      delay(10);
     }
-    for(int i=ls_tilt;i>=0;i--)
+    ls_pan=5;
+    for(j=ls_tilt; j>=0; j--)
     {
-     tilt.write(i);
-     delay(10); 
+      tilt.write(j);
+      delay(10);
     }
-    ls_pan=0;
-    ls_tilt=0;  
+    ls_tilt=0;
   }
 
+  else if(cmd=="u\n") //Pan=0 and Tilt=0
+  {
+    Serial.println("U");
+    Serial.println(tilt.read());
+  }
 
-  
-  else if(cmd=="C\n")
+  else if(cmd=="c\n") //Pan=80 and Tilt=80
   {
     Serial.println("Center");
-    for(int i=ls_pan;i=80;i++)
+    if(ls_pan<80)
     {
-     pan.write(i);
-     delay(10); 
+    for(i=ls_pan; i<=80; i++)
+    {
+      pan.write(i);
+      delay(10);
     }
-    for(int i=ls_tilt;i<=80;i++)
+    }
+    else
     {
-     tilt.write(i);
-     delay(10); 
+    for(i=ls_pan; i>=80; i--)
+    {
+      pan.write(i);
+      delay(10);
+    }
     }
     ls_pan=80;
-    ls_tilt=80;  
+    if(ls_tilt<80)
+    {
+    for(j=ls_tilt; j<=80; j++)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(j=ls_pan; j>=80; j--)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    ls_tilt=80; 
   }
 
 
