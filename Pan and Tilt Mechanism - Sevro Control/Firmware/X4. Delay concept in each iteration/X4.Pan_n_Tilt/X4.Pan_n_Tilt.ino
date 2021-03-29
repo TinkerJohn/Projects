@@ -49,7 +49,7 @@ ls_pan=80;
     delay(1000);
     Serial.println("\n");
 
-    Serial.println("Enter required direction: (T, B, L, R, TR, TL, BR, BL, O, C)");
+    Serial.println("Enter correct direction: (t, b, l, r, tr, tl, br, bl, o, c)");
 }
 
 void loop() 
@@ -140,42 +140,12 @@ void loop()
 
 
   
-  else if(cmd=="l\n") //Pan=0 and Tilt=125
+  else if(cmd=="l\n") //Pan=10 and Tilt=125
   {
     Serial.println("Left");
-    for(i=ls_pan; i>=5; i--)
+    if(ls_pan<10)
     {
-      pan.write(i);
-      delay(10);
-    }
-    ls_pan=5;
-    if(ls_tilt<125)
-    {
-    for(j=ls_tilt; j<=125; j++)
-    {
-      tilt.write(j);
-      delay(10);
-    }
-    }
-    else
-    {
-    for(j=ls_pan; j>=125; j--)
-    {
-      tilt.write(j);
-      delay(10);
-    }
-    }
-    ls_tilt=125;
-  }
-
-
-  
-  else if(cmd=="r\n") //Pan=180 and Tilt=125
-  {
-    Serial.println("Right");
-    if(ls_pan<180)
-    {
-    for(i=ls_pan; i<=180; i++)
+    for(i=ls_pan; i<=10; i++)
     {
       pan.write(i);
       delay(10);
@@ -183,13 +153,13 @@ void loop()
     }
     else
     {
-    for(i=ls_pan; i>=180; i--)
+    for(i=ls_pan; i>=10; i--)
     {
       pan.write(i);
       delay(10);
     }
     }
-    ls_pan=180;
+    ls_pan=10;
     if(ls_tilt<125)
     {
     for(j=ls_tilt; j<=125; j++)
@@ -206,7 +176,48 @@ void loop()
       delay(10);
     }
     }
-    ls_tilt=125;     
+    ls_tilt=125;
+  }
+
+
+  
+  else if(cmd=="r\n") //Pan=10 and Tilt=35
+  {
+    Serial.println("Right");
+    if(ls_pan<10)
+    {
+    for(i=ls_pan; i<=10; i++)
+    {
+      pan.write(i);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(i=ls_pan; i>=10; i--)
+    {
+      pan.write(i);
+      delay(10);
+    }
+    }
+    ls_pan=10;
+    if(ls_tilt<35)
+    {
+    for(j=ls_tilt; j<=35; j++)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    else
+    {
+    for(j=ls_tilt; j>=35; j--)
+    {
+      tilt.write(j);
+      delay(10);
+    }
+    }
+    ls_tilt=35;     
   }
 
 
@@ -228,10 +239,10 @@ void loop()
     {
       pan.write(i);
       delay(10);
-    }
+    } 
     }
     ls_pan=125;
-    if(ls_tilt)
+    if(ls_tilt<125)
     {
     for(j=ls_tilt; j<=125; j++)
     {
@@ -378,12 +389,23 @@ void loop()
   else if(cmd=="o\n") //Pan=0 and Tilt=0
   {
     Serial.println("Origin");
-    for(i=ls_pan; i>=5; i--)
+    if(ls_pan<10)
+    {
+    for(i=ls_pan; i<=10; i++)
     {
       pan.write(i);
       delay(10);
     }
-    ls_pan=5;
+    }
+    else
+    {
+    for(i=ls_pan; i>=10; i--)
+    {
+      pan.write(i);
+      delay(10);
+    }
+    }
+    ls_pan=10;
     for(j=ls_tilt; j>=0; j--)
     {
       tilt.write(j);
@@ -392,11 +414,6 @@ void loop()
     ls_tilt=0;
   }
 
-  else if(cmd=="u\n") //Pan=0 and Tilt=0
-  {
-    Serial.println("U");
-    Serial.println(tilt.read());
-  }
 
   else if(cmd=="c\n") //Pan=80 and Tilt=80
   {
@@ -438,10 +455,17 @@ void loop()
   }
 
 
-
+  else if(cmd=="x\n") //Pan=0 and Tilt=0
+  {
+    Serial.println("pan");
+    Serial.println(pan.read());
+    Serial.println("tilt");
+    Serial.println(tilt.read());
+  }
+  
   else
   {
-    Serial.println("Enter correct direction: (T, B, L, R, TR, TL, BR, BL, O, C)"); 
+    Serial.println("Enter correct direction: (t, b, l, r, tr, tl, br, bl, o, c)"); 
   }
 
 
