@@ -47,7 +47,7 @@ void setup()
     delay(1000);
     Serial.println("\n");
     
-    Serial.println("Enter required direction: (T, B, L, R, TR, TL, BR, BL)");
+    Serial.println("Enter required direction: (T, B, L, R, TR, TL, BR, BL, O, C)");
 }
 
 void loop() 
@@ -57,12 +57,64 @@ void loop()
   String cmd= Serial.readString(); //Reading the Input string from Serial port. 
 
   if(cmd=="T\n")
-  Serial.println("top");
+  {
+    Serial.println("Top");
+    pan.write(80);
+    tilt.write(125);
+  }
   else if(cmd=="B\n")
-  Serial.println("top");
-   else if(cmd=="T\n")
-  Serial.println("top");  
-
- 
+  {
+    Serial.println("Bottom");
+    pan.write(80);
+    tilt.write(35);
+  }
+  else if(cmd=="L\n")
+  {
+    Serial.println("Left");
+    pan.write(0);
+    tilt.write(125);  
+  }
+  else if(cmd=="R\n")
+  {
+    Serial.println("Right");
+    pan.write(180);
+    tilt.write(125);  
+  }
+  else if(cmd=="TR\n")
+  {
+    Serial.println("Top Right");
+    pan.write(125);
+    tilt.write(125);  
+  }
+  else if(cmd=="TL\n")
+  {
+    Serial.println("Top Left");
+    pan.write(35);
+    tilt.write(125);  
+  }
+  else if(cmd=="BR\n")
+  {
+    Serial.println("Bottom Right");
+    pan.write(35);
+    tilt.write(35);  
+  }
+  else if(cmd=="BL\n")
+  {
+    Serial.println("Bottom Left");
+    pan.write(125);
+    tilt.write(35);  
+  }
+  else if(cmd=="O\n")
+  {
+    Serial.println("Origin");
+    pan.write(0);
+    tilt.write(0);  
+  }
+    else if(cmd=="C\n")
+  {
+    Serial.println("Center");
+    pan.write(80);
+    tilt.write(80);  
+  }   
  }                     
 }
