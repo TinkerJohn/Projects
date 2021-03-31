@@ -39,8 +39,9 @@ ls_pan=80;
     Serial.println("Done");
     delay(1000);
    */
-    pan.attach(2,600,2300);  // (pin, min, max)
-    tilt.attach(3,600,2300); 
+
+    pan.attach(2);  // (pin, min, max)
+    tilt.attach(3); 
     Serial.println("3. Centering");
     pan.write(80);
     tilt.write(80);
@@ -140,12 +141,12 @@ void loop()
 
 
   
-  else if(cmd=="l\n") //Pan=10 and Tilt=125
+  else if(cmd=="l\n") //Pan=0 and Tilt=125
   {
     Serial.println("Left");
-    if(ls_pan<10)
+    if(ls_pan<0)
     {
-    for(i=ls_pan; i<=10; i++)
+    for(i=ls_pan; i<=0; i++)
     {
       pan.write(i);
       delay(10);
@@ -153,13 +154,13 @@ void loop()
     }
     else
     {
-    for(i=ls_pan; i>=10; i--)
+    for(i=ls_pan; i>=0; i--)
     {
       pan.write(i);
       delay(10);
     }
     }
-    ls_pan=10;
+    ls_pan=0;
     if(ls_tilt<125)
     {
     for(j=ls_tilt; j<=125; j++)
@@ -181,12 +182,12 @@ void loop()
 
 
   
-  else if(cmd=="r\n") //Pan=10 and Tilt=35
+  else if(cmd=="r\n") //Pan=0 and Tilt=35
   {
     Serial.println("Right");
-    if(ls_pan<10)
+    if(ls_pan<0)
     {
-    for(i=ls_pan; i<=10; i++)
+    for(i=ls_pan; i<=0; i++)
     {
       pan.write(i);
       delay(10);
@@ -194,13 +195,13 @@ void loop()
     }
     else
     {
-    for(i=ls_pan; i>=10; i--)
+    for(i=ls_pan; i>=0; i--)
     {
       pan.write(i);
       delay(10);
     }
     }
-    ls_pan=10;
+    ls_pan=0;
     if(ls_tilt<35)
     {
     for(j=ls_tilt; j<=35; j++)
@@ -389,9 +390,9 @@ void loop()
   else if(cmd=="o\n") //Pan=0 and Tilt=0
   {
     Serial.println("Origin");
-    if(ls_pan<10)
+    if(ls_pan<0)
     {
-    for(i=ls_pan; i<=10; i++)
+    for(i=ls_pan; i<=0; i++)
     {
       pan.write(i);
       delay(10);
@@ -399,13 +400,13 @@ void loop()
     }
     else
     {
-    for(i=ls_pan; i>=10; i--)
+    for(i=ls_pan; i>=0; i--)
     {
-      pan.write(i);
+      pan.write(0);
       delay(10);
     }
     }
-    ls_pan=10;
+    ls_pan=0;
     for(j=ls_tilt; j>=0; j--)
     {
       tilt.write(j);
